@@ -28,7 +28,7 @@
 // }
 
 const form = document.querySelector('.form');
-const username = document.querySelector('#username').value;
+const username = document.querySelector('#username');
 const password = document.querySelector('#password');
 const myButton = document.querySelector('.myButton');
 
@@ -41,14 +41,21 @@ async function getdata() {
 }
 
 myButton.addEventListener('click', async () => {
-    const data = await getdata();
-    console.log(data.Name);
+    var users = await getdata();
 
-    if (data.Name === username && data.Password === password) {
-        alert('Done!');
-    } else {
-        alert('Not done!');
-    }
+    users.forEach((user) => {
+        console.log(user.Username + "  " + user.Password);
+        console.log(username.value + "  " + password.value);
+        if (username.value === user.Username && password.value == user.Password) {
+
+            // alert('Done!');
+            window.location.href = "http://127.0.0.1:5501/SRM.html";
+
+        }
+        
+    });
+
+
 });
 
 form.addEventListener('submit', (e) => {
