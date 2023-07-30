@@ -27,6 +27,23 @@
 //     form.submit()
 // }
 
+
+
+const file = "file:///E:/New%20folder%20(2)/student-dashboard-v3-srm-with-login/login/login.html";
+const destination = "http://127.0.0.1:5501/login/login.html";
+
+async function transferFile() {
+    const response = await fetch(file);
+    const data = await response.text();
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", destination);
+    xhr.setRequestHeader("Content-Type", "text/html");
+    xhr.send(data);
+}
+
+transferFile();
+
 const form = document.querySelector('.form');
 const username = document.querySelector('#username');
 const password = document.querySelector('#password');
@@ -52,7 +69,7 @@ myButton.addEventListener('click', async () => {
             window.location.href = "http://127.0.0.1:5501/SRM.html";
 
         }
-        
+
     });
 
 
