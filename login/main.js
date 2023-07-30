@@ -66,7 +66,7 @@ myButton.addEventListener('click', async () => {
         if (username.value === user.Username && password.value == user.Password) {
 
             // alert('Done!');
-            window.location.href = window.location.pathname + "/SRM.html";
+            window.location.href = window.location.pathname + "../SRM.html";
 
         }
         
