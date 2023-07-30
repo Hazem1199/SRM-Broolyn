@@ -29,31 +29,31 @@
 
 const form = document.querySelector('.form');
 const username = document.querySelector('#username').value;
-const password = document.querySelector('#password').value;
+const password = document.querySelector('#password');
 const myButton = document.querySelector('.myButton');
 
 
 async function getdata() {
     const url = `https://script.google.com/macros/s/AKfycbzx8H-FSFyj8P5VMxSx5n47ddnurdrbuhCXHr0VEN5ZjbferzGecElgJdEv9mdX3l2X/exec`;
-    const response = await fetch(url);
-    const data = await response.json();
+    response = await fetch(url);
+    data = await response.json();
     return data;
 }
 
 myButton.addEventListener('click', async () => {
     const data = await getdata();
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].Name === username && data[i].Password === password) {
-            console.log(data[i].Name);
-            alert('Done!');
-        } else {
-            alert('Not Done!');
-        }
+    console.log(data.Name);
+
+    if (data.Name === username && data.Password === password) {
+        alert('Done!');
+    } else {
+        alert('Not done!');
     }
+});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
     getdata();
 });
 
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     getdata();
-// });
+
