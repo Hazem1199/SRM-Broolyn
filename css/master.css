@@ -909,6 +909,12 @@ ul {
   color: #bbb;
 }
 
+
+.profile-page{
+  margin: 10px 20px;
+  font-weight: bolder;
+}
+
 /* End Settings */
 /* Start Profile Page */
 @media (max-width: 767px) {
@@ -2179,5 +2185,13 @@ body {
   text-align: center;
   padding: 10px;
   vertical-align: middle;
+}
+
+
+
+.Welcome{
+  padding-left: 30px;
+  font-size: small;
+  font-weight: bolder;
 }
 

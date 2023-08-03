@@ -210,8 +210,8 @@ async function showAllGroup(id) {
 
 
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
+var paramsGroup = new URLSearchParams(window.location.search);
+var id = paramsGroup.get('id');
 showAllGroup(id);
 
 // add an event listener to the window object to run the `change()` function when a new window is opened

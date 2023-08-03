@@ -28,18 +28,44 @@
 // }
 
 
+var loadingDiv = document.querySelector(".loading-div");
+
+var overlay = document.createElement("div");
+overlay.style.position = "fixed";
+overlay.style.display = "none";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "0%";
+overlay.style.height = "0%";
+overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+// overlay.style.backdropFilter = "blur(5px)";
+overlay.style.zIndex = "1";
+document.body.appendChild(overlay);
+
+function change() {
+    loadingDiv.style.display = "block";
+    overlay.style.display = "block";
+}
+
+function hide() {
+    overlay.style.display = "none";
+    loadingDiv.style.display = "none";
+}
+
+
+
 
 const file = window.location.pathname + "/login.html";
 const destination = "http://127.0.0.1:5501/login/login.html";
 
 async function transferFile() {
-  const response = await fetch(file);
-  const data = await response.text();
+    const response = await fetch(file);
+    const data = await response.text();
 
-  const xhr = new XMLHttpRequest();
-  xhr.open("PUT", destination);
-  xhr.setRequestHeader("Content-Type", "text/html");
-  xhr.send(data);
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", destination);
+    xhr.setRequestHeader("Content-Type", "text/html");
+    xhr.send(data);
 }
 
 transferFile();
@@ -48,7 +74,8 @@ const form = document.querySelector('.form');
 const username = document.querySelector('#username');
 const password = document.querySelector('#password');
 const myButton = document.querySelector('.myButton');
-
+var correct = false;
+var count = 0;
 
 async function getdata() {
     const url = `https://script.google.com/macros/s/AKfycbzx8H-FSFyj8P5VMxSx5n47ddnurdrbuhCXHr0VEN5ZjbferzGecElgJdEv9mdX3l2X/exec`;
@@ -58,22 +85,57 @@ async function getdata() {
 }
 
 myButton.addEventListener('click', async () => {
+    change()
     var users = await getdata();
 
-    users.forEach((user) => {
+
+     users.forEach((user) => {
         console.log(user.Username + "  " + user.Password);
         console.log(username.value + "  " + password.value);
         if (username.value === user.Username && password.value == user.Password) {
-
             // alert('Done!');
-            window.location.href ="http://127.0.0.1:5501/SRM.html";
-
+            const emp = {
+                username : user.Username,
+                password : user.Password,
+                role : user.Role
+            }
+            // console.log("test " + emp.username);
+            localStorage.setItem('myUser',emp.username)
+            localStorage.setItem('myUserRole',emp.role)
+            correct = true;
+            return;
         }
+        count++;
+        console.log(count);
         
-    });
+    }
+    );
+    
 
-
+    if (correct == true) {
+        hide()
+        window.location.href = "../SRM.html";
+        
+    }
+    else {
+        hide()
+        alert("incorrect Username or Password");
+    }
 });
+
+const togglePassword = document.querySelector('#togglePassword');
+
+
+togglePassword.addEventListener("click", function () {
+    // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+    
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+});
+
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();

@@ -73,8 +73,8 @@ async function showDeadlines(id) {
     hide(); // hide the loading overlay once the requests are shown
 }
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
+var paramsDead = new URLSearchParams(window.location.search);
+var id = paramsDead.get('id');
 showDeadlines(id);
 
 // add an event listener to the window object to run the `change()` function when a new window is opened

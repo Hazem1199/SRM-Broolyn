@@ -94,7 +94,26 @@ searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   sessionStorage.clear();
   const value = searchInput[0].value;
-  display(value);
+  if (value.trim() === "") {
+    // Create a Bootstrap alert message
+    const alertMessage = document.createElement("div");
+    alertMessage.classList.add("alert", "alert-danger");
+    alertMessage.textContent = "Please enter a valid Student Id";
+    alertMessage.style.width = "50%";
+    alertMessage.style.margin = "0 auto";
+    alertMessage.style.display = "flex";
+    alertMessage.style.alignItems = "center";
+    alertMessage.style.justifyContent = "center";
+    const section2 = document.querySelector(".section2");
+    section2.appendChild(alertMessage);
+
+    // Hide the alert message after half a second
+    setTimeout(() => {
+      alertMessage.style.display = "none";
+    }, 1000);
+  } else {
+    display(value);
+  }
 });
 
 window.onload = function () {
@@ -123,24 +142,30 @@ window.onload = function () {
 
 
 
-let params = {};
-let regex = /([^&=]+)=([^&]*)/g, m;
-while (m = regex.exec(location.href)){
-  params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-}
+// let params = {};
+// let regex = /([^&=]+)=([^&]*)/g, m;
+// while (m = regex.exec(location.href)){
+//   params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+// }
 
-if (Object.keys(params).length > 0) {
-  localStorage.setItem('authInfo', JSON.stringify(params));
-}
+// if (Object.keys(params).length > 0) {
+//   localStorage.setItem('authInfo', JSON.stringify(params));
+// }
 
-// hide the access token 
-if (window.history && window.history.pushState) {
-  window.history.pushState({}, document.title, "/SRM.html");
-} else {
-  window.location.replace("/SRM.html");
-}
+// // hide the access token 
+// if (window.history && window.history.pushState) {
+//   window.history.pushState({}, document.title, "/SRM.html");
+// } else {
+//   window.location.replace("/SRM.html");
+// }
 
-let info = JSON.parse(localStorage.getItem('authInfo'));
-console.log(JSON.parse(localStorage.getItem('authInfo')));
-console.log(info['access_token']);
-console.log(info['expires_in']);
+// let info = JSON.parse(localStorage.getItem('authInfo'));
+// console.log(JSON.parse(localStorage.getItem('authInfo')));
+// console.log(info['access_token']);
+// console.log(info['expires_in']);
+
+console.log(user);
+const welcome = document.querySelector('.Welcome');
+var user = localStorage.getItem("myUser");
+
+welcome.innerHTML = `Welcome ${user}!`

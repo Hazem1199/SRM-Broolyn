@@ -56,16 +56,16 @@ async function getInfoRequest() {
 // }
 // }
 
-async function getInfoRequest(id) {
-  const baseUrl = `https://script.google.com/macros/s/AKfycbzoB5fiDd4YOJFeeKct55UJojNEecJJRew8gNQEwNVwexgDYP7gV7CBNHbb3fn-RowS/exec`;
-  let url = baseUrl;
-  if (id) {
-    url += `?id=${id}`;
-  }
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
+// async function getInfoRequest(id) {
+//   const baseUrl = `https://script.google.com/macros/s/AKfycbzoB5fiDd4YOJFeeKct55UJojNEecJJRew8gNQEwNVwexgDYP7gV7CBNHbb3fn-RowS/exec`;
+//   let url = baseUrl;
+//   if (id) {
+//     url += `?id=${id}`;
+//   }
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   return data;
+// }
 
 const numRequest = document.querySelector(".num-request");
 const savedDataReq = sessionStorage.getItem("myDataReq");

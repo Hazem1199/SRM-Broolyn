@@ -168,9 +168,14 @@ async function showRequests(id) {
   tableBody.innerHTML = "";
   let filteredRequests = requests.filter((request) => request.ID == id);
   let requestCount = filteredRequests.length;
-  // console.log(requestCount);
+
+  // Add a div to display the number of request results
+  let requestCountDiv = document.createElement("div");
+  requestCountDiv.textContent = `Number of request results: ${requestCount}`;
+  requestCountDiv.classList.add("requestCount");
+  tableBody.appendChild(requestCountDiv);
+
   filteredRequests.forEach((request) => {
-    // console.log(request);
     let row = document.createElement("div");
     row.classList.add("divTableRow");
     let dateCell = document.createElement("div");
@@ -195,20 +200,16 @@ async function showRequests(id) {
     row.appendChild(employeeCell);
     tableBody.appendChild(row);
   });
-  // Add a div to display the number of request results
-  let requestCountDiv = document.createElement("div");
-  requestCountDiv.textContent = `Number of request results: ${requestCount}`;
-  requestCountDiv.classList.add("requestCount");
-  tableBody.appendChild(requestCountDiv);
   hide(); // hide the loading overlay once the requests are shown
 }
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+var paramsreq = new URLSearchParams(window.location.search);
+var id = paramsreq.get("id");
 showRequests(id);
 
 // add an event listener to the window object to run the `change()` function when a new window is opened
 window.addEventListener("open", change);
+
 
 window.onload = function () {
   const sidebar = document.querySelector(".sidebar");

@@ -145,7 +145,7 @@
 
 // // form.addEventListener('submit', action);
 
-var loadingDiv = document.querySelector('.loading-div')
+var loadingDiv = document.querySelector('.loading-div');
 
 var overlay = document.createElement("div");
 overlay.style.position = "fixed";
@@ -169,7 +169,6 @@ function hide() {
   loadingDiv.style.display = "none";
 }
 
-
 async function getInfoComplaint(id) {
   const baseUrl = `https://script.google.com/macros/s/AKfycbwO4ZvcLywR7K06KqYbDNau2VuVENY_3IAaJHvLlixq1W2ANSQNYnMpB_sdFEphHjMg/exec`;
   let url = baseUrl;
@@ -182,7 +181,7 @@ async function getInfoComplaint(id) {
 }
 
 async function showComplaint(id) {
-  change()
+  change();
   const complaints = await getInfoComplaint(id);
   let tableBody = document.querySelector('.divTableBody');
   tableBody.innerHTML = '';
@@ -211,11 +210,11 @@ async function showComplaint(id) {
     row.appendChild(employeeCell);
     tableBody.appendChild(row);
   });
-  hide()
+  hide();
 }
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id');
+var paramsComp = new URLSearchParams(window.location.search);
+var id = paramsComp.get('id');
 showComplaint(id);
 
 // add an event listener to the window object to run the `change()` function when a new window is opened
