@@ -100,7 +100,7 @@ async function showRequests(id) {
   }
   if (lastRequest) {
     let req = {
-      ID : lastRequest.ID,
+      ID: lastRequest.ID,
       Message: lastRequest.Message,
       Date: lastRequest.Date,
       totalRequest: filteredRequests.length,
@@ -116,6 +116,15 @@ async function showRequests(id) {
     });
     cardFooter1.textContent =
       "last request : " + formattedDate + " at " + formattedTime;
+
+    if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
+      numRequest.textContent = 0;
+      cardFooter1.textContent = "Can't Find any request";
+    } else {
+      numRequest.textContent = requestCount;
+      cardFooter1.textContent =
+        "last request : " + formattedDate + " at " + formattedTime;
+    }
     let requestUrl = `Request.html?id=${id}`;
     seeMore1.href = requestUrl;
     let request = await fetch(requestUrl);

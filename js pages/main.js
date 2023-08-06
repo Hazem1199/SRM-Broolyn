@@ -94,7 +94,7 @@ searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   sessionStorage.clear();
   const value = searchInput[0].value;
-  if (value.trim() === "") {
+  if (value.trim() === "" || isNaN(value) || value.charAt(0) !== "2") {
     // Create a Bootstrap alert message
     const alertMessage = document.createElement("div");
     alertMessage.classList.add("alert", "alert-danger");
@@ -110,8 +110,20 @@ searchButton.addEventListener("click", (e) => {
     // Hide the alert message after half a second
     setTimeout(() => {
       alertMessage.style.display = "none";
-    }, 1000);
+    }, 2000);
+
+    fName.innerHTML = " ";
+    ID.innerHTML = " ";
+    Email.innerHTML = " ";
+    Phone.innerHTML = " ";
+    headName.innerHTML = " ";
+    pic.src = " ";
+
+
+    // Stop all functions from another JavaScript file
+    return;
   } else {
+    
     display(value);
   }
 });

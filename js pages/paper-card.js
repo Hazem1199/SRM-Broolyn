@@ -19,11 +19,11 @@ const footer5 = document.querySelector('.footer5');
 
 
 async function getPaper() {
-    const url = `https://script.google.com/macros/s/AKfycbxvOaxJZa4sqVK66ng6FHlsOgZO34ZwG9RuKaU6zqEW7Bx9y1cDL2mnb15s2agPEMiV0g/exec`;
-    response = await fetch(url);
-    data = await response.json();
-    // console.log(data[0].Name);
-    return data;
+  const url = `https://script.google.com/macros/s/AKfycbxvOaxJZa4sqVK66ng6FHlsOgZO34ZwG9RuKaU6zqEW7Bx9y1cDL2mnb15s2agPEMiV0g/exec`;
+  response = await fetch(url);
+  data = await response.json();
+  // console.log(data[0].Name);
+  return data;
 }
 
 // Get the result from session storage
@@ -42,29 +42,33 @@ async function showPaper(id) {
   let donePaperCount = 0;
   let paperCount = 3; // initialize paperCount with the correct value
   filteredPapers.forEach(student => {
-      if (filteredPapers) {
-          // increment donePaperCount for each paper completed by the student
-          if (student['Personal id'] == true) donePaperCount++;
-          if (student.Certificate == true) donePaperCount++;
-          if (student['HR Letter'] == true) donePaperCount++;
-          document.querySelector('.num-Papers').textContent = `${donePaperCount} / ${paperCount}`;
-          console.log(donePaperCount);
-          const remainingPapers = [];
-    if (student['Personal id'] == false) remainingPapers.push('Personal id');
-    if (student.Certificate  == false) remainingPapers.push('Certificate');
-    if (student['HR Letter']  == false) remainingPapers.push('HR Letter');
-    if (remainingPapers.length === 0) {
-      footer5.textContent = `No paper(s) remaining`;
-    } else {
-      const remainingPapersText = remainingPapers.join(' and ');
-      footer5.textContent = `${remainingPapersText} paper(s) remaining`;
+    if (filteredPapers) {
+      // increment donePaperCount for each paper completed by the student
+      if (student['Personal id'] == true) donePaperCount++;
+      if (student.Certificate == true) donePaperCount++;
+      if (student['HR Letter'] == true) donePaperCount++;
+      if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
+        document.querySelector('.num-Papers').textContent = `0 / 0`;
+      } else {
+        document.querySelector('.num-Papers').textContent = `${donePaperCount} / ${paperCount}`;
+      }
+      console.log(donePaperCount);
+      const remainingPapers = [];
+      if (student['Personal id'] == false) remainingPapers.push('Personal id');
+      if (student.Certificate == false) remainingPapers.push('Certificate');
+      if (student['HR Letter'] == false) remainingPapers.push('HR Letter');
+      if (remainingPapers.length === 0) {
+        footer5.textContent = `No paper(s) remaining`;
+      } else {
+        const remainingPapersText = remainingPapers.join(' and ');
+        footer5.textContent = `${remainingPapersText} paper(s) remaining`;
+      }
     }
-  }
-});
+  });
 
-// Save the result in session storage
-const result = { donePaperCount, paperCount , id};
-sessionStorage.setItem('paperResult', JSON.stringify(result));
+  // Save the result in session storage
+  const result = { donePaperCount, paperCount, id };
+  sessionStorage.setItem('paperResult', JSON.stringify(result));
 }
 
 
@@ -72,8 +76,8 @@ sessionStorage.setItem('paperResult', JSON.stringify(result));
 
 
 searchButton.addEventListener('click', async () => {
-    const id = searchInput[0].value;
-    showPaper(id)
+  const id = searchInput[0].value;
+  showPaper(id)
 });
 
 

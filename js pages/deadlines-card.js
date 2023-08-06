@@ -38,16 +38,14 @@ async function getInfoDeadlines() {
 // }
 
 
-try {
+
   const savedResultDead = sessionStorage.getItem('studentsData');
   if (savedResultDead) {
     const sResult = JSON.parse(savedResultDead);
     // Use the result to update the UI
     showDeadlines(sResult.value);
   }
-} catch (error) {
-  console.log(error);
-}
+
 
 
 

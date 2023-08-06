@@ -115,7 +115,17 @@ async function showComplaint(id) {
       minute: "numeric",
     });
     cardFooter2.textContent =
-      "last complaint : " + formattedDate + " at " + formattedTime;
+        "last complaint : " + formattedDate + " at " + formattedTime;
+
+    if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
+      numComplaint.textContent = 0;
+      cardFooter2.textContent = "Can't Find any complaint";
+    } else {
+      numComplaint.textContent = complaintCount;
+      cardFooter2.textContent =
+        "last complaint : " + formattedDate + " at " + formattedTime;
+    }
+
     let complaintUrl = `Complaint.html?id=${id}`;
     seeMore2.href = complaintUrl;
     let complaint = await fetch(complaintUrl);
