@@ -78,15 +78,13 @@ async function showGroup(id) {
     });
   }
 
-  // Save the result in session storage
-  const gResult = { totalDoneModules, moduleCount, id };
-  sessionStorage.setItem('groupResult', JSON.stringify(gResult));
+  
   // Hide spinner element
   // document.body.removeChild(spinner);
 
   // Update the module count
-  const moduleCountElement = document.getElementById('moduleCount');
-  moduleCountElement.textContent = `${totalDoneModules} / ${moduleCount}`;
+  // const moduleCountElement = document.getElementById('moduleCount');
+  // moduleCountElement.textContent = `${totalDoneModules} / ${moduleCount}`;
 
   // Update the footer based on the next module deadline
   const filteredModules = students.filter(student => {
@@ -107,7 +105,9 @@ async function showGroup(id) {
   localStorage.setItem('moduleData', JSON.stringify(moduleData));
   window.open(moduleUrl);
 
-  
+  // Save the result in session storage
+  const gResult = { totalDoneModules, moduleCount, value };
+  sessionStorage.setItem('groupResult', JSON.stringify(gResult));
 
 }
 

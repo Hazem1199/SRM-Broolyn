@@ -61,7 +61,7 @@ async function showDeadlines(value) {
     const footer3 = document.querySelector('.footer3');
     let filteredDeadlines = students.filter(student => student.ID == value);
     let deadlineCount = filteredDeadlines.length;
-
+    
     console.log(deadlineCount);
     const numberOfPaidDeadlines = filteredDeadlines.filter(student => student.Status === "paid").length;
     console.log(numberOfPaidDeadlines);

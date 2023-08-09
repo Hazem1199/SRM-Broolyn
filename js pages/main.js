@@ -47,6 +47,14 @@ async function getData() {
   return data;
 }
 
+async function getAllCards() {
+  const url = `https://script.google.com/macros/s/AKfycbwqja3nFfJIBT0WFGthzn9PdnykwSVjAI3q3dVvtIdo4AbXrJdozLHabxfUkuwbVtZV3Q/exec`;
+  response1 = await fetch(url);
+  data1 = await response1.json();
+  // console.log(data[0].Name);
+  return data1;
+}
+
 // Get data from session storage if it exists
 const savedData = sessionStorage.getItem("myData");
 if (savedData) {
@@ -90,6 +98,23 @@ async function display(value) {
   hide();
 }
 
+
+async function displayCards(value) {
+  var cards = await getAllCards();
+
+  cards.forEach(card => {
+    if (value == card.ID) {
+      let info = { value: card.ID, paln: card.Schadule, payment: card.Payments, paper: card.Papers, request: card.Requests, complaint: card.Complaints };
+      console.log(info.paln);
+      const moduleCountElement = document.getElementById('moduleCount');
+      moduleCountElement.textContent = info.paln;
+    }
+  });
+}
+
+
+
+
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   sessionStorage.clear();
@@ -123,10 +148,16 @@ searchButton.addEventListener("click", (e) => {
     // Stop all functions from another JavaScript file
     return;
   } else {
-    
+
     display(value);
+    displayCards(value)
   }
 });
+
+
+
+
+
 
 window.onload = function () {
   const sidebar = document.querySelector(".sidebar");
