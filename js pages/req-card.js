@@ -56,16 +56,16 @@ async function getInfoRequest() {
 // }
 // }
 
-// async function getInfoRequest(id) {
-//   const baseUrl = `https://script.google.com/macros/s/AKfycbzoB5fiDd4YOJFeeKct55UJojNEecJJRew8gNQEwNVwexgDYP7gV7CBNHbb3fn-RowS/exec`;
-//   let url = baseUrl;
-//   if (id) {
-//     url += `?id=${id}`;
-//   }
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   return data;
-// }
+async function getInfoRequest(id) {
+  const baseUrl = `https://script.google.com/macros/s/AKfycbzoB5fiDd4YOJFeeKct55UJojNEecJJRew8gNQEwNVwexgDYP7gV7CBNHbb3fn-RowS/exec`;
+  let url = baseUrl;
+  if (id) {
+    url += `?id=${id}`;
+  }
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
 
 const numRequest = document.querySelector(".num-request");
 const savedDataReq = sessionStorage.getItem("myDataReq");
@@ -100,7 +100,7 @@ async function showRequests(id) {
   }
   if (lastRequest) {
     let req = {
-      ID: lastRequest.ID,
+      ID : lastRequest.ID,
       Message: lastRequest.Message,
       Date: lastRequest.Date,
       totalRequest: filteredRequests.length,
@@ -116,15 +116,6 @@ async function showRequests(id) {
     });
     cardFooter1.textContent =
       "last request : " + formattedDate + " at " + formattedTime;
-
-    if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
-      numRequest.textContent = 0;
-      cardFooter1.textContent = "Can't Find any request";
-    } else {
-      numRequest.textContent = requestCount;
-      cardFooter1.textContent =
-        "last request : " + formattedDate + " at " + formattedTime;
-    }
     let requestUrl = `Request.html?id=${id}`;
     seeMore1.href = requestUrl;
     let request = await fetch(requestUrl);
@@ -138,7 +129,11 @@ async function showRequests(id) {
 
 searchButton.addEventListener("click", () => {
   const id = searchInput[0].value;
+  if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
+    numRequest.textContent = 0;
+    cardFooter1.textContent = "Can't Find any request";
+  } else {
   showRequests(id);
-
+  }
   // showLastRequest(id);
 });

@@ -49,6 +49,7 @@ async function showPaper(id) {
       if (student['HR Letter'] == true) donePaperCount++;
       if (id.trim() === "" || isNaN(id) || id.charAt(0) !== "2") {
         document.querySelector('.num-Papers').textContent = `0 / 0`;
+        footer5.textContent = `No paper(s) Found`;
       } else {
         document.querySelector('.num-Papers').textContent = `${donePaperCount} / ${paperCount}`;
       }

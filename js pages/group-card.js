@@ -10,7 +10,7 @@
 // var searchButton = document.querySelector('.search-button');
 // var pic = document.getElementById("profile-pic")
 // var headName = document.querySelector('.headName') 
-const seeMore4 = document.querySelector('.seeMore4');
+// const seeMore4 = document.querySelector('.seeMore4');
 const footer4 = document.querySelector('.footer4');
 
 

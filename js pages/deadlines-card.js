@@ -14,7 +14,7 @@
 
 
 
-const seeMore3 = document.querySelector('.seeMore3');
+// const seeMore3 = document.querySelector('.seeMore3');
 
 async function getInfoDeadlines() {
   const url = `https://script.googleusercontent.com/macros/echo?user_content_key=0R8d1iqm90C-GGTz99LLcABq6JENQdCw-rur0yb31njY0Wc0L5n0bzMAIKEfTYonYZRQLHNd2lFhE3ySk3SBTral3hsVvRwZm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnLvWzkbjjR_fgiUtTLMvhDvPsd6Ah7bMHYDZ2SfFYsGe49N88IBzLFHYettXQhUz1lKKK7_QllFkpCW2Mbqx36uCwy8sBRNeetz9Jw9Md8uu&lib=MQfVKFgVXIr2Rm9shkxeT9DVOmtUjdkhJ`;
@@ -57,7 +57,7 @@ async function showDeadlines(value) {
       const sResult = { value };
       sessionStorage.setItem("studentsData", JSON.stringify(sResult));
     }
-    const numDeadline = document.querySelector('.num-deadline');
+    // const numDeadline = document.querySelector('.num-deadline');
     const footer3 = document.querySelector('.footer3');
     let filteredDeadlines = students.filter(student => student.ID == value);
     let deadlineCount = filteredDeadlines.length;
@@ -69,11 +69,11 @@ async function showDeadlines(value) {
     const now = new Date();
     const nextDeadline = deadlines.find(deadline => new Date(deadline["Due Date"]) > now);
     if (numberOfPaidDeadlines === deadlineCount) {
-      const numberOfUnpaidDeadlines = deadlineCount
-      numDeadline.textContent = `${numberOfUnpaidDeadlines} / ${deadlineCount}`;
+      // const numberOfUnpaidDeadlines = deadlineCount
+      // numDeadline.textContent = `${numberOfUnpaidDeadlines} / ${deadlineCount}`;
       footer3.textContent = "No upcoming deadlines";
     } else {
-      numDeadline.textContent = `${numberOfPaidDeadlines} / ${deadlineCount}`;
+      // numDeadline.textContent = `${numberOfPaidDeadlines} / ${deadlineCount}`;
       const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(nextDeadline["Due Date"]));
       footer3.textContent = `Next deadline: ${formattedDueDate}`;
     }

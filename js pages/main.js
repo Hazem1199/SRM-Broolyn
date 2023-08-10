@@ -15,6 +15,12 @@ var searchButton = document.querySelector(".search-button");
 var pic = document.getElementById("profile-pic");
 var headName = document.querySelector(".headName");
 var loadingDiv = document.querySelector(".loading-div");
+const moduleCountElement = document.getElementById('moduleCount');
+const numDeadline = document.querySelector('.num-deadline');
+const footer3 = document.querySelector('.footer3');
+const seeMore3 = document.querySelector('.seeMore3');
+const seeMore4 = document.querySelector('.seeMore4');
+
 
 
 var overlay = document.createElement("div");
@@ -70,6 +76,24 @@ if (savedData) {
   display(data.ID);
   hide()
 }
+const savedDataPlan = sessionStorage.getItem("myDataPlan");
+if (savedDataPlan) {
+  const data = JSON.parse(savedDataPlan);
+  // Use the data to render the page
+  change();
+  displayPlanCard(data.value)
+  hide()
+}
+
+const savedDataDead = sessionStorage.getItem("myDataDead");
+if (savedDataDead) {
+  const data = JSON.parse(savedDataDead);
+  // Use the data to render the page
+  change();
+  displayDeadCard(data.value)
+  hide()
+}
+
 
 async function display(value) {
   change();
@@ -99,17 +123,53 @@ async function display(value) {
 }
 
 
-async function displayCards(value) {
-  var cards = await getAllCards();
+async function displayPlanCard(value) {
+  const cards = await getAllCards();
 
   cards.forEach(card => {
     if (value == card.ID) {
-      let info = { value: card.ID, paln: card.Schadule, payment: card.Payments, paper: card.Papers, request: card.Requests, complaint: card.Complaints };
-      console.log(info.paln);
-      const moduleCountElement = document.getElementById('moduleCount');
-      moduleCountElement.textContent = info.paln;
+      let planInfo = { value: card.ID, paln: card.Schadule, payment: card.Payments, paper: card.Papers, request: card.Requests, complaint: card.Complaints };
+      // Save the data to session storage
+      sessionStorage.setItem("myDataPlan", JSON.stringify(planInfo));
+      // Use the data to render the page
+      // traning plan 
+      moduleCountElement.textContent = planInfo.paln;
     }
   });
+
+
+  // module location 
+  let moduleUrl = `Group.html?id=${value}`;
+  seeMore4.href = moduleUrl;
+  let module = await fetch(moduleUrl);
+  let moduleData = await module.json();
+  sessionStorage.setItem('moduleData', JSON.stringify(moduleData));
+  window.open(moduleUrl); // Open moduleUrl in a new window
+}
+
+async function displayDeadCard(value) {
+  const cards = await getAllCards();
+
+  cards.forEach(card => {
+    if (value == card.ID) {
+      let DeadInfo = { value: card.ID, paln: card.Schadule, payment: card.Payments, paper: card.Papers, request: card.Requests, complaint: card.Complaints };
+      
+      // Save the data to session storage
+      sessionStorage.setItem("myDataDead", JSON.stringify(DeadInfo));
+      // Use the data to render the page
+
+      // deadLine
+      numDeadline.textContent = DeadInfo.payment;
+    }
+  });
+  // deadline location 
+  let deadlineUrl = `Deadlines.html?id=${value}`;
+  seeMore3.href = deadlineUrl;
+  let deadline = await fetch(deadlineUrl);
+  let deadlineData = await deadline.json();
+  sessionStorage.setItem('deadlineData', JSON.stringify(deadlineData));
+  window.open(deadlineUrl); // Open deadlineUrl in a new window
+
 }
 
 
@@ -136,13 +196,17 @@ searchButton.addEventListener("click", (e) => {
     setTimeout(() => {
       alertMessage.style.display = "none";
     }, 2000);
-
+    //display all boxes in this case
     fName.innerHTML = " ";
     ID.innerHTML = " ";
     Email.innerHTML = " ";
     Phone.innerHTML = " ";
     headName.innerHTML = " ";
     pic.src = " ";
+    moduleCountElement.textContent = "0 / 0";
+    numDeadline.textContent = "0 / 0";
+    footer3.textContent = "No deadlines found";
+
 
 
     // Stop all functions from another JavaScript file
@@ -150,7 +214,8 @@ searchButton.addEventListener("click", (e) => {
   } else {
 
     display(value);
-    displayCards(value)
+    displayDeadCard(value)
+    displayPlanCard(value)
   }
 });
 
