@@ -67,6 +67,19 @@ async function getInfoRequest(id) {
   return data;
 }
 
+
+const spinner2 = document.getElementById('spinner2');
+
+function loadOn2() {
+  spinner2.style.display = 'block';
+}
+
+function loadOff2() {
+  spinner2.style.display = 'none';
+}
+
+
+
 const numRequest = document.querySelector(".num-request");
 const savedDataReq = sessionStorage.getItem("myDataReq");
 if (savedDataReq) {
@@ -76,7 +89,13 @@ if (savedDataReq) {
   showRequests(data.ID)
 }
 
+
+
+
+
 async function showRequests(id) {
+  numRequest.textContent = " ";
+  loadOn2()
   const requests = await getInfoRequest(id);
   // let tableBody = document.querySelector('.divTableBody');
   // tableBody.innerHTML = '';
@@ -98,6 +117,7 @@ async function showRequests(id) {
       }
     }
   }
+  loadOff2()
   if (lastRequest) {
     let req = {
       ID : lastRequest.ID,

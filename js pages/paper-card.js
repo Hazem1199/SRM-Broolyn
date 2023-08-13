@@ -26,6 +26,19 @@ async function getPaper() {
   return data;
 }
 
+
+const spinner = document.getElementById('spinner');
+
+function loadOn() {
+  spinner.style.display = 'block';
+}
+
+function loadOff() {
+  spinner.style.display = 'none';
+}
+
+
+
 // Get the result from session storage
 const savedResult = sessionStorage.getItem('paperResult');
 if (savedResult) {
@@ -35,7 +48,16 @@ if (savedResult) {
 }
 
 
+
+
+
+
+
+
+
 async function showPaper(id) {
+  document.querySelector('.num-Papers').textContent = " ";
+  loadOn()
   const students = await getPaper(id);
   let filteredPapers = students.filter(student => student.ID == id);
 
@@ -66,6 +88,8 @@ async function showPaper(id) {
       }
     }
   });
+
+  loadOff()
 
   // Save the result in session storage
   const result = { donePaperCount, paperCount, id };

@@ -21,6 +21,29 @@ const footer3 = document.querySelector('.footer3');
 const seeMore3 = document.querySelector('.seeMore3');
 const seeMore4 = document.querySelector('.seeMore4');
 
+// loading card
+
+const spinner3 = document.getElementById('spinner3');
+
+function loadOn3() {
+  spinner3.style.display = 'block';
+}
+
+function loadOff3() {
+  spinner3.style.display = 'none';
+}
+
+
+const spinner4 = document.getElementById('spinner4');
+
+function loadOn4() {
+  spinner4.style.display = 'block';
+}
+
+function loadOff4() {
+  spinner4.style.display = 'none';
+}
+ //end
 
 
 var overlay = document.createElement("div");
@@ -122,8 +145,10 @@ async function display(value) {
   hide();
 }
 
-
+// plan function 
 async function displayPlanCard(value) {
+  moduleCountElement.textContent = " ";
+  loadOn4()
   const cards = await getAllCards();
 
   cards.forEach(card => {
@@ -136,7 +161,7 @@ async function displayPlanCard(value) {
       moduleCountElement.textContent = planInfo.paln;
     }
   });
-
+  loadOff4()
 
   // module location 
   let moduleUrl = `Group.html?id=${value}`;
@@ -145,15 +170,20 @@ async function displayPlanCard(value) {
   let moduleData = await module.json();
   sessionStorage.setItem('moduleData', JSON.stringify(moduleData));
   window.open(moduleUrl); // Open moduleUrl in a new window
+  
 }
 
+
+
 async function displayDeadCard(value) {
+  numDeadline.textContent = " ";
+  loadOn3()
   const cards = await getAllCards();
 
   cards.forEach(card => {
     if (value == card.ID) {
       let DeadInfo = { value: card.ID, paln: card.Schadule, payment: card.Payments, paper: card.Papers, request: card.Requests, complaint: card.Complaints };
-      
+
       // Save the data to session storage
       sessionStorage.setItem("myDataDead", JSON.stringify(DeadInfo));
       // Use the data to render the page
@@ -162,6 +192,7 @@ async function displayDeadCard(value) {
       numDeadline.textContent = DeadInfo.payment;
     }
   });
+  loadOff3()
   // deadline location 
   let deadlineUrl = `Deadlines.html?id=${value}`;
   seeMore3.href = deadlineUrl;
@@ -169,7 +200,7 @@ async function displayDeadCard(value) {
   let deadlineData = await deadline.json();
   sessionStorage.setItem('deadlineData', JSON.stringify(deadlineData));
   window.open(deadlineUrl); // Open deadlineUrl in a new window
-
+  
 }
 
 

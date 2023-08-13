@@ -912,7 +912,7 @@ ul {
 
 .profile-page{
   margin: 10px 20px;
-  font-weight: bolder;
+  font-weight: 500;
 }
 
 /* End Settings */
@@ -1507,25 +1507,25 @@ div.paleBlueRows {
 
 .divTable.paleBlueRows .divTableCell,
 .divTable.paleBlueRows .divTableHead {
-  border: 1px solid #FFFFFF;
-  padding: 3px 2px;
+  border: 1px solid #e0e0e0;
+  padding: 12px 2px;
 }
 
-.divTable.paleBlueRows .divTableBody .divTableCell {
-  font-size: 14px;
-}
+/* .divTable.paleBlueRows .divTableBody .divTableCell {
+  font-size: 15px;
+} */
 
 .divTable.paleBlueRows .divTableRow:nth-child(even) {
-  background: #D0E4F5;
+  background: #fff;
 }
 
 .divTable.paleBlueRows .divTableHeading {
-  background: #0B6FA4;
+  background: #0C6EA3;
   border-bottom: 5px solid #FFFFFF;
 }
 
 .divTable.paleBlueRows .divTableHeading .divTableHead {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: #FFFFFF;
   text-align: center;
@@ -1537,7 +1537,7 @@ div.paleBlueRows {
 }
 
 .paleBlueRows .tableFootStyle {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 @media (max-width: 767px) {
@@ -2194,4 +2194,35 @@ body {
   font-size: small;
   font-weight: bolder;
 }
+
+/* login input */
+#loading-div-card {
+  position: absolute;
+  top: 40%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  display: none;
+  background: url('../imgs/Infinity-1.3s-51px.svg') center center;
+}
+
+#spinner {
+  display: none ;
+}
+#spinner1 {
+  display: none ;
+}
+#spinner2 {
+  display: none ;
+}
+#spinner3 {
+  display: none ;
+}
+#spinner4 {
+  display: none ;
+}
+
+
+
 

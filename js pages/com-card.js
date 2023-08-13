@@ -67,6 +67,17 @@ async function getInfoComplaint(id) {
   return data;
 }
 
+const spinner1 = document.getElementById('spinner1');
+
+function loadOn1() {
+  spinner1.style.display = 'block';
+}
+
+function loadOff1() {
+  spinner1.style.display = 'none';
+}
+
+
 const numComplaint = document.querySelector(".num-complaint");
 const savedDatacom = sessionStorage.getItem("myDataCom");
 if (savedDatacom) {
@@ -77,6 +88,8 @@ if (savedDatacom) {
 }
 
 async function showComplaint(id) {
+  numComplaint.textContent = " ";
+  loadOn1()
   const complaints = await getInfoComplaint(id);
   // let tableBody = document.querySelector('.divTableBody');
   // tableBody.innerHTML = '';
@@ -97,6 +110,7 @@ async function showComplaint(id) {
       }
     }
   }
+  loadOff1()
   if (lastComplaint) {
     let comp = {
       ID: lastComplaint.ID,
@@ -116,6 +130,7 @@ async function showComplaint(id) {
     });
     cardFooter2.textContent =
       "last complaint : " + formattedDate + " at " + formattedTime;
+      
     let complaintUrl = `Complaint.html?id=${id}`;
     seeMore2.href = complaintUrl;
     let complaint = await fetch(complaintUrl);
@@ -125,6 +140,7 @@ async function showComplaint(id) {
   } else {
     // cardText2.textContent = "No request found with ID " + value;
   }
+  
 }
 
 searchButton.addEventListener("click", () => {
