@@ -174,7 +174,7 @@ async function displayPlanCard(value) {
 }
 
 
-
+// dead function 
 async function displayDeadCard(value) {
   numDeadline.textContent = " ";
   loadOn3()

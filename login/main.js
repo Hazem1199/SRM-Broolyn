@@ -28,47 +28,47 @@
 // }
 
 
-var loadingDiv = document.querySelector(".loading-div");
+// var loadingDiv = document.querySelector(".loading-div");
 
-var overlay = document.createElement("div");
-overlay.style.position = "fixed";
-overlay.style.display = "none";
-overlay.style.top = "0";
-overlay.style.left = "0";
-overlay.style.width = "0%";
-overlay.style.height = "0%";
-overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
-// overlay.style.backdropFilter = "blur(5px)";
-overlay.style.zIndex = "1";
-document.body.appendChild(overlay);
+// var overlay = document.createElement("div");
+// overlay.style.position = "fixed";
+// overlay.style.display = "none";
+// overlay.style.top = "0";
+// overlay.style.left = "0";
+// overlay.style.width = "0%";
+// overlay.style.height = "0%";
+// overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+// // overlay.style.backdropFilter = "blur(5px)";
+// overlay.style.zIndex = "1";
+// document.body.appendChild(overlay);
 
-function change() {
-    loadingDiv.style.display = "block";
-    overlay.style.display = "block";
-}
+// function change() {
+//     loadingDiv.style.display = "block";
+//     overlay.style.display = "block";
+// }
 
-function hide() {
-    overlay.style.display = "none";
-    loadingDiv.style.display = "none";
-}
-
-
+// function hide() {
+//     overlay.style.display = "none";
+//     loadingDiv.style.display = "none";
+// }
 
 
-const file = window.location.pathname + "/login.html";
-const destination = "http://127.0.0.1:5501/login/login.html";
 
-async function transferFile() {
-    const response = await fetch(file);
-    const data = await response.text();
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", destination);
-    xhr.setRequestHeader("Content-Type", "text/html");
-    xhr.send(data);
-}
+// const file = window.location.pathname + "/login.html";
+// const destination = "http://127.0.0.1:5501/login/login.html";
 
-transferFile();
+// async function transferFile() {
+//     const response = await fetch(file);
+//     const data = await response.text();
+
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("PUT", destination);
+//     xhr.setRequestHeader("Content-Type", "text/html");
+//     xhr.send(data);
+// }
+
+// transferFile();
 
 const form = document.querySelector('.form');
 const username = document.querySelector('#username');
@@ -85,7 +85,7 @@ async function getdata() {
 }
 
 myButton.addEventListener('click', async () => {
-    change()
+    // change()
     var users = await getdata();
 
 
@@ -113,27 +113,27 @@ myButton.addEventListener('click', async () => {
     
 
     if (correct == true) {
-        hide()
+        // hide()
         window.location.href = "../SRM.html";
         
     }
     else {
-        hide()
+        // hide()
         alert("incorrect Username or Password");
     }
 });
 
-const togglePassword = document.querySelector('#togglePassword');
+// const togglePassword = document.querySelector('#togglePassword');
 
 
-togglePassword.addEventListener("click", function () {
-    // toggle the type attribute
-    const type = password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
+// togglePassword.addEventListener("click", function () {
+//     // toggle the type attribute
+//     const type = password.getAttribute("type") === "password" ? "text" : "password";
+//     password.setAttribute("type", type);
     
-    // toggle the icon
-    this.classList.toggle("bi-eye");
-});
+//     // toggle the icon
+//     this.classList.toggle("bi-eye");
+// });
 
 
 
